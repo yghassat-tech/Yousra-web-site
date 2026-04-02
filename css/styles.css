@@ -1,0 +1,863 @@
+/* Yousra Ghassat — static site (HTML + CSS only) */
+
+:root {
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #5c5c5c;
+  --accent: #2c2c2c;
+  --line: #e5e2dc;
+  --placeholder: #dedad3;
+  --font-display: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "Source Sans 3", system-ui, sans-serif;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.75rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+  --max: 68rem;
+  --header-h: 4.25rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* —— Header —— */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: rgba(250, 249, 247, 0.92);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+
+.site-header__inner {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.site-logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-logo:hover {
+  text-decoration: none;
+  opacity: 0.75;
+}
+
+.nav-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-xs) var(--space-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 720px) {
+  .nav-main {
+    gap: var(--space-sm) var(--space-md);
+    font-size: 0.8125rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .nav-main {
+    font-size: 0.9375rem;
+  }
+}
+
+.nav-main a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-main a:hover {
+  text-decoration: underline;
+}
+
+.nav-main a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+/* —— Main layout —— */
+main {
+  min-height: calc(100vh - var(--header-h) - 12rem);
+}
+
+/* Home: single hero section — don’t stretch main past the hero (avoids gap above footer) */
+main:has(> .hero:only-child) {
+  min-height: 0;
+}
+
+main:has(> .hero:only-child) + .site-footer {
+  margin-top: 0;
+}
+
+/* —— Home hero (full-bleed background) —— */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: min(92vh, 52rem);
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--placeholder);
+  background-image: url("../assets/images/hero.jpg");
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    rgba(26, 26, 26, 0.58) 0%,
+    rgba(26, 26, 26, 0.35) 38%,
+    rgba(26, 26, 26, 0.2) 70%,
+    rgba(26, 26, 26, 0.15) 100%
+  );
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+  padding-top: clamp(3.5rem, 10vh, 6rem);
+  padding-bottom: clamp(3.5rem, 10vh, 6rem);
+}
+
+.hero__content {
+  max-width: 34rem;
+}
+
+.hero__tagline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-md);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 0.12em 1.25em rgba(0, 0, 0, 0.35);
+}
+
+.link-cta {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--text);
+  padding-bottom: 0.2em;
+}
+
+.link-cta--inverse {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.95);
+}
+
+.link-cta:hover {
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+.link-cta--inverse:hover {
+  opacity: 0.88;
+}
+
+/* —— Full-bleed page heroes (campaign, travel) —— */
+.campaign-hero {
+  width: 100%;
+  margin: 0;
+}
+
+.campaign-hero__bg {
+  width: 100%;
+  min-height: clamp(20rem, 50vw, 56rem);
+  background-color: #7aa3c0;
+  background-image: url("../assets/images/IMG_0657.JPG");
+  background-size: cover;
+  /* Anchor to top so sky + headline aren’t cropped (cover + center hid the top) */
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+/* Travel hero: background + overlay copy */
+.travel-hero {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  min-height: clamp(18rem, 56vw, 38rem);
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.travel-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #4a5f55;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.travel-hero--morocco .travel-hero__bg {
+  background-image: url("../assets/images/travel/Morocco/IMG_0631.JPG");
+}
+
+.travel-hero--montreal .travel-hero__bg {
+  background-color: #3d4a5c;
+  background-image: url("../assets/images/travel/Montreal/IMG_1352.webp");
+}
+
+.travel-hero--barcelona .travel-hero__bg {
+  background-color: #6b6458;
+  background-image: url("../assets/images/travel/Barcelona/IMG_0654.JPG");
+  background-position: center 15%;
+}
+
+.travel-hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(12, 22, 18, 0.72) 0%,
+    rgba(12, 22, 18, 0.4) 42%,
+    rgba(12, 22, 18, 0.12) 100%
+  );
+}
+
+.travel-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(2.75rem, 9vw, 5rem) var(--space-md);
+}
+
+/* Squarespace-style stacked kicker + display title (yousraghassat travel galleries) */
+.travel-hero__title-stack {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--font-display);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 0.12em 1.35em rgba(0, 0, 0, 0.45);
+}
+
+.travel-hero__kicker {
+  display: block;
+  font-size: clamp(1.35rem, 3.6vw, 2rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.32;
+  margin: 0 0 0.12em;
+}
+
+.travel-hero__kicker + .travel-hero__kicker {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+.travel-hero__headline {
+  display: block;
+  font-size: clamp(2.75rem, 8vw, 4rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-style: normal;
+}
+
+/* Travel story layout (narrow prose + full-width grid), matches yousraghassat travel pages */
+.travel-story__prose {
+  max-width: 40rem;
+  margin: 0 auto var(--space-lg);
+}
+
+.travel-story--morocco .travel-story__prose h3 {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.travel-story--morocco .travel-story__prose h4 {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.travel-story__signoff {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  margin-top: var(--space-md);
+  margin-bottom: 0;
+}
+
+/* —— About page —— */
+.page-about {
+  max-width: min(var(--max), 52rem);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md) var(--space-xl);
+}
+
+.page-about__layout {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+@media (min-width: 800px) {
+  .page-about__layout {
+    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+}
+
+@media (min-width: 960px) {
+  .page-about__layout {
+    grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  }
+}
+
+.page-about__figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--placeholder);
+  overflow: hidden;
+}
+
+.page-about__figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.page-about__body {
+  min-width: 0;
+}
+
+.page-about__body .page-about__label {
+  margin-top: 0;
+}
+
+.page-about__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-xs);
+}
+
+.page-about h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-lg);
+}
+
+.page-about h2 {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 500;
+  margin: var(--space-lg) 0 var(--space-sm);
+}
+
+.page-about p {
+  margin: 0 0 var(--space-md);
+  color: var(--text);
+}
+
+.page-about__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* —— Footer —— */
+.site-footer {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg) var(--space-md);
+  background: #d9d9d9;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.site-footer__social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: var(--space-md);
+}
+
+.site-footer__icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: #1a1a1a;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.site-footer__icon-link:hover {
+  opacity: 0.88;
+  text-decoration: none;
+}
+
+.site-footer__icon-link:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+.site-footer__icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.site-footer__collab {
+  margin: 0 auto var(--space-md);
+  max-width: 22rem;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.site-footer__collab a {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.site-footer__collab a:hover {
+  opacity: 0.82;
+}
+
+.site-footer__collab a:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.site-footer__collab-sparkle {
+  display: inline-block;
+  color: var(--text);
+  opacity: 0.55;
+  margin: 0 0.12em;
+  animation: site-footer-sparkle 2.4s ease-in-out infinite;
+}
+
+.site-footer__collab-sparkle--lag {
+  animation-delay: 1.2s;
+}
+
+@keyframes site-footer-sparkle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1) rotate(-6deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__collab-sparkle {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+.site-footer__copy {
+  margin: 0;
+}
+
+/* —— Inner pages (campaign, travel, essay hubs) —— */
+.page-inner {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.page-inner--wide {
+  max-width: var(--max);
+}
+
+.page-inner__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-sm);
+}
+
+.page-inner h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-md);
+}
+
+.page-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: 500;
+  margin: var(--space-lg) 0 var(--space-sm);
+}
+
+.page-inner h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin: var(--space-md) 0 var(--space-xs);
+}
+
+.page-inner h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 500;
+  margin: 0 0 var(--space-md);
+  color: var(--text-muted);
+}
+
+.page-inner p {
+  margin: 0 0 var(--space-md);
+}
+
+.page-inner .lede {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.hub-cards {
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 600px) {
+  .hub-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.hub-cards a {
+  display: block;
+  padding: var(--space-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hub-cards a:hover {
+  border-color: var(--text-muted);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+}
+
+.hub-cards__title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin: 0 0 var(--space-xs);
+}
+
+.hub-cards__meta {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.campaign-block h2 {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: var(--space-lg) 0 var(--space-sm);
+}
+
+.campaign-block h2:first-child {
+  margin-top: 0;
+}
+
+.campaign-block p {
+  margin: 0 0 var(--space-sm);
+}
+
+.campaign-disclaimer {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  align-items: start;
+}
+
+@media (min-width: 700px) {
+  .media-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.media-grid__cell {
+  background: var(--placeholder);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--space-sm);
+}
+
+.media-grid__cell:not(:has(> img)) {
+  aspect-ratio: 1;
+  min-height: 8rem;
+}
+
+.media-grid__cell:has(> img) {
+  padding: 0;
+  aspect-ratio: auto;
+  display: block;
+}
+
+.media-grid__cell img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Grids where every cell is a photo — explicit layout (no crop, mixed heights) */
+.media-grid--all-photos > .media-grid__cell {
+  aspect-ratio: auto;
+  padding: 0;
+  display: block;
+  min-width: 0;
+  align-self: start;
+}
+
+.media-grid--all-photos > .media-grid__cell img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  display: block;
+}
+
+/* Equal-height tiles (fixed aspect); fill with cover so row cells match height */
+.media-grid--uniform {
+  align-items: start;
+}
+
+.media-grid--uniform > .media-grid__cell:has(> img) {
+  aspect-ratio: 1;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.media-grid--uniform > .media-grid__cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* CSS multi-column masonry — short columns, varied image heights */
+.media-grid.media-grid--masonry {
+  display: block;
+  column-count: 2;
+  column-gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+@media (min-width: 700px) {
+  .media-grid.media-grid--masonry {
+    column-count: 3;
+  }
+}
+
+.media-grid--masonry .media-grid__cell {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: var(--space-sm);
+  padding: 0;
+  display: block;
+  aspect-ratio: auto;
+  background: var(--placeholder);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.media-grid--masonry .media-grid__cell img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.essay-body p {
+  margin: 0 0 var(--space-md);
+}
+
+.essay-body p:last-child {
+  margin-bottom: 0;
+}
+
+.essay-source {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+}
+
+.travel-verse {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0 0 var(--space-sm);
+  color: var(--text);
+}
+
+.travel-verse + .travel-verse {
+  margin-top: 0;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--space-md);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--text);
+  text-decoration: underline;
+}

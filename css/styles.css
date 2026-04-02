@@ -258,7 +258,7 @@ main:has(> .hero:only-child) + .site-footer {
   width: 100%;
   min-height: clamp(20rem, 50vw, 56rem);
   background-color: #7aa3c0;
-  background-image: url("../assets/images/IMG_0657.JPG");
+  background-image: url("../assets/images/IMG_0657.jpg");
   background-size: cover;
   /* Anchor to top so sky + headline aren’t cropped (cover + center hid the top) */
   background-position: center top;
@@ -288,7 +288,7 @@ main:has(> .hero:only-child) + .site-footer {
 }
 
 .travel-hero--morocco .travel-hero__bg {
-  background-image: url("../assets/images/travel/Morocco/IMG_0631.JPG");
+  background-image: url("../assets/images/travel/Morocco/IMG_0631.jpg");
 }
 
 .travel-hero--montreal .travel-hero__bg {
@@ -298,7 +298,7 @@ main:has(> .hero:only-child) + .site-footer {
 
 .travel-hero--barcelona .travel-hero__bg {
   background-color: #6b6458;
-  background-image: url("../assets/images/travel/Barcelona/IMG_0654.JPG");
+  background-image: url("../assets/images/travel/Barcelona/IMG_0654.jpg");
   background-position: center 15%;
 }
 

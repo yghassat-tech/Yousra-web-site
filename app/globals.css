@@ -1,4 +1,4 @@
-/* Yousra Ghassat — static site (HTML + CSS only) */
+/* Yousra Ghassat — global styles (Next.js) */
 
 :root {
   --bg: #faf9f7;
@@ -8,8 +8,7 @@
   --accent: #2c2c2c;
   --line: #e5e2dc;
   --placeholder: #dedad3;
-  --font-display: "Cormorant Garamond", "Georgia", serif;
-  --font-body: "Source Sans 3", system-ui, sans-serif;
+  /* --font-display / --font-body: set by next/font on <html> */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.75rem;
@@ -31,7 +30,7 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-body), system-ui, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.65;
   color: var(--text);
@@ -175,7 +174,7 @@ main:has(> .hero:only-child) + .site-footer {
   inset: 0;
   z-index: 0;
   background-color: var(--placeholder);
-  background-image: url("../assets/images/hero.jpg");
+  background-image: url("/assets/images/hero.jpg");
   background-size: cover;
   background-position: center 20%;
   background-repeat: no-repeat;
@@ -258,7 +257,7 @@ main:has(> .hero:only-child) + .site-footer {
   width: 100%;
   min-height: clamp(20rem, 50vw, 56rem);
   background-color: #7aa3c0;
-  background-image: url("../assets/images/IMG_0657.jpg");
+  background-image: url("/assets/images/IMG_0657.jpg");
   background-size: cover;
   /* Anchor to top so sky + headline aren’t cropped (cover + center hid the top) */
   background-position: center top;
@@ -288,17 +287,17 @@ main:has(> .hero:only-child) + .site-footer {
 }
 
 .travel-hero--morocco .travel-hero__bg {
-  background-image: url("../assets/images/travel/Morocco/IMG_0631.jpg");
+  background-image: url("/assets/images/travel/Morocco/IMG_0631.jpg");
 }
 
 .travel-hero--montreal .travel-hero__bg {
   background-color: #3d4a5c;
-  background-image: url("../assets/images/travel/Montreal/IMG_1352.webp");
+  background-image: url("/assets/images/travel/Montreal/IMG_1352.webp");
 }
 
 .travel-hero--barcelona .travel-hero__bg {
   background-color: #6b6458;
-  background-image: url("../assets/images/travel/Barcelona/IMG_0654.jpg");
+  background-image: url("/assets/images/travel/Barcelona/IMG_0654.jpg");
   background-position: center 15%;
 }
 
